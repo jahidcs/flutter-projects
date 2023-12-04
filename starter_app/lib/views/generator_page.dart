@@ -21,7 +21,6 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('A random AWESOME idea:'),
           BigCard(pair: pair),
           SizedBox(height: 10),
           Row(
@@ -68,10 +67,20 @@ class BigCard extends StatelessWidget {
       color: theme.colorScheme.primary,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
+        child: AnimatedSize(
+          duration: Duration(microseconds: 200),
+          child: MergeSemantics(
+            child: Wrap(children: [
+              Text(
+                pair.first,
+                style: style.copyWith(fontWeight: FontWeight.w200),
+              ),
+              Text(
+                pair.second,
+                style: style.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ]),
+          ),
         ),
       ),
     );

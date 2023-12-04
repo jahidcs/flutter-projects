@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_app/providers/app_state.dart';
-import 'package:starter_app/views/generator_page.dart';
 
 class FavoritePage extends StatelessWidget {
   @override
@@ -15,13 +14,32 @@ class FavoritePage extends StatelessWidget {
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
           child: Text('You have '
               '${appState.favorites.length} favorites:'),
         ),
-        for (var pair in appState.favorites) BigCard(pair: pair)
+        Expanded(
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 400,
+              childAspectRatio: 400 / 80,
+            ),
+            children: [
+              for (var pair in appState.favorites)
+                ListTile(
+                  leading: IconButton(
+                    icon: Icon(Icons.favorite),
+                    color: Theme.of(context).colorScheme.primary,
+                    onPressed: () => appState.removeFavorite(pair),
+                  ),
+                  title: Text(pair.asLowerCase),
+                )
+            ],
+          ),
+        )
       ],
     );
   }
