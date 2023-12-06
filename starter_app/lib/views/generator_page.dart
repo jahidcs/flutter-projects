@@ -2,6 +2,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starter_app/providers/app_state.dart';
+import 'package:starter_app/views/history_list_view.dart';
 
 class GeneratorPage extends StatelessWidget {
   const GeneratorPage({super.key});
@@ -21,6 +22,11 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Expanded(
+            flex: 3,
+            child: HistoryListView(),
+          ),
+          SizedBox(height: 10),
           BigCard(pair: pair),
           SizedBox(height: 10),
           Row(
@@ -29,7 +35,6 @@ class GeneratorPage extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: () {
                   appState.toggleFavorite();
-                  print(appState.favorites);
                 },
                 icon: Icon(icon),
                 label: Text('Like'),
@@ -42,7 +47,8 @@ class GeneratorPage extends StatelessWidget {
                 child: Text('Next'),
               ),
             ],
-          )
+          ),
+          Spacer(flex: 2),
         ],
       ),
     );
