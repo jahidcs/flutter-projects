@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:starter_app/providers/app_state.dart';
 import 'package:starter_app/views/favourite_page.dart';
 import 'package:starter_app/views/generator_page.dart';
-import 'package:starter_app/views/themes_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,10 +18,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Starter App',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-          useMaterial3: true,
-        ),
         home: MyHomePage(),
       ),
     );
@@ -45,8 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
       case 1:
         page = FavoritePage();
-      case 2:
-        page = ThemesPage();
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -66,11 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.favorite),
                       label: Text('Favorites'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.format_paint),
-                      label: Text('Themes'),
-                    ),
+                    )
                   ],
                   selectedIndex: selectedIndex,
                   onDestinationSelected: (value) {
